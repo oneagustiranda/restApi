@@ -1,8 +1,8 @@
 const sql = require("./db.js");
 const Book = function (book) {
     this.title = book.title;
-    this.description = Book.description;
-    this.images = Book.images;
+    this.description = book.description;
+    this.images = book.images;
 };
 //Mengambil semua data buku
 Book.getAll = result => {
@@ -18,7 +18,7 @@ Book.getAll = result => {
 };
 // Mengambil buku yang memiliki id = BookId
 Book.findById = (id, result) => {
-    sql.query(`SELECT * FROM Books WHERE id = ${id}`, (err, res) => {
+    sql.query(`SELECT * FROM books WHERE id = ${id}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -49,7 +49,7 @@ Book.create = (newBook, result) => {
 };
 // Mengupdate data buku yang memiliki id = id
 Book.updateById = ( id, Book, result) => {
-    sql.query("UPDATE Books SETtitle = ?, description = ?, images = ? WHERE id = ?",
+    sql.query("UPDATE books SET title = ?, description = ?, images = ? WHERE id = ?",
     [Book.title, Book.description, Book.images, id],
     (err, res) => {
         if (err) {
@@ -67,7 +67,7 @@ Book.updateById = ( id, Book, result) => {
 };
 // Menghapus buku yang memiliki id = id
 Book.remove = (id, result) => {
-    sql.query("DELETE FROM Books WHERE id = ?", id, (err, res) => {
+    sql.query("DELETE FROM books WHERE id = ?", id, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -84,7 +84,7 @@ Book.remove = (id, result) => {
 };
 // Menghapus semua buku
 Book.removeAll = result => {
-    sql.query("DELETE FROM Books", (err, res) => {
+    sql.query("DELETE FROM books", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
